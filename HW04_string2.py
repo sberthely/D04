@@ -17,7 +17,13 @@
 # If the string length is less than 3, leave it unchanged.
 # Return the resulting string.
 def verbing(s):
-    # +++your code here+++
+    if len(s) < 3:
+        return s
+    elif len(s) >= 3:
+        if s.find('ing', len(s) - 3, len(s)) >= 0:
+            return s + 'ly'
+        else:
+            return s + 'ing'
     return
 
 
@@ -30,8 +36,13 @@ def verbing(s):
 # So 'This dinner is not that bad!' yields:
 # This dinner is good!
 def not_bad(s):
-    # +++your code here+++
-    return
+    char_not = s.find('not')
+    char_bad = s.find('bad')
+    if (char_not >= 0) and (char_bad >= 0) and char_bad > char_not:
+        first_part = s.split('not')[0]
+        last_char = s.find('bad') + 3
+        return first_part + 'good' + s[last_char:len(s)]
+    return s
 
 
 # F. front_back
@@ -42,8 +53,23 @@ def not_bad(s):
 # Given 2 strings, a and b, return a string of the form
 #  a-front + b-front + a-back + b-back
 def front_back(a, b):
-    # +++your code here+++
-    return
+    if len(a) % 2 != 0:
+        a_first_len = int(len(a)/2 + 1)
+    else:
+        a_first_len = int(len(a)/2)
+
+    if len(b) % 2 != 0:
+        b_first_len = int(len(b)/2 + 1)
+    else:
+        b_first_len = int(len(b)/2)
+
+    first_part_a = a[:a_first_len]
+    last_part_a = a[a_first_len:len(a)]
+
+    first_part_b = b[:b_first_len]
+    last_part_b = b[b_first_len:len(b)]
+
+    return first_part_a + first_part_b + last_part_a + last_part_b
 
 
 # Simple provided test() function used in main() to print
